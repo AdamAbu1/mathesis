@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathesis — blackboard mockup (M1)</title>
+<style>
+  :root {
+    --slate: #1c2823;
+    --slate-deep: #141e1a;
+    --chalk: #eae7dc;
+    --chalk-dim: #b4b1a5;
+    --chalk-faint: #8a887e;
+    --yellow: #e8d48b;
+    --rose: #e0a9a4;
+    --blue: #a9c7d9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--slate-deep); }
+  body {
+    font-family: 'Iowan Old Style', 'Palatino', Georgia, serif;
+    color: var(--chalk-dim);
+    background:
+      radial-gradient(1200px 700px at 30% 10%, rgba(255,255,255,.045), transparent 60%),
+      radial-gradient(900px 600px at 75% 80%, rgba(255,255,255,.03), transparent 55%),
+      linear-gradient(170deg, #202e28 0%, var(--slate) 45%, #182420 100%);
+    min-height: 100vh;
+    padding: 34px 20px 60px;
+    line-height: 1.62;
+  }
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 3;
+    opacity: .05; mix-blend-mode: screen;
+  }
+  .smudge {
+    position: fixed; pointer-events: none; z-index: 1; border-radius: 50%;
+    background: rgba(233,230,220,.05); filter: blur(46px);
+  }
+  .wrap { max-width: 790px; margin: 0 auto; position: relative; z-index: 4; }
+
+  .chalkf { font-family: 'Chalkduster', 'Chalkboard SE', 'Comic Sans MS', cursive; }
+  .chalk-glow { text-shadow: 0 0 4px rgba(234,231,220,.28); }
+
+  header { text-align: center; margin-bottom: 10px; }
+  header h1 {
+    font-size: 44px; letter-spacing: .32em; color: var(--chalk);
+    font-weight: 400; text-indent: .32em;
+  }
+  header .tag { color: var(--chalk-faint); font-style: italic; font-size: 15px; margin-top: 2px; }
+  .rule {
+    height: 14px; margin: 14px auto 6px; width: 60%; opacity: .8;
+  }
+
+  /* ---- globe block ---- */
+  .globeblock { position: relative; margin: 4px 0 8px; }
+  .globeblock svg.globe { display: block; width: 100%; height: auto; }
+  .lenschip {
+    position: absolute; top: 6px; left: 4px;
+    font-size: 12.5px; color: var(--chalk-dim);
+    border: 1.5px solid rgba(234,231,220,.5); border-radius: 999px;
+    padding: 3px 12px; letter-spacing: .04em;
+  }
+  .zoomcol {
+    position: absolute; right: 4px; top: 90px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .zoomcol div {
+    width: 32px; height: 32px; border: 1.6px solid rgba(234,231,220,.55);
+    border-radius: 7px; color: var(--chalk); display: grid; place-items: center;
+    font-size: 16px;
+  }
+
+  /* ---- scrubber ---- */
+  .scrub { margin: 0 6px 40px; }
+  .scrub svg { display: block; width: 100%; height: auto; }
+  .readout { text-align: center; margin-top: 2px; }
+  .readout .era { color: var(--blue); letter-spacing: .22em; font-size: 14px; }
+  .readout .span { color: var(--chalk-faint); font-size: 12.5px; font-style: italic; }
+
+  /* ---- entry (person) ---- */
+  .entry, .ideacard {
+    border: 2px solid rgba(234,231,220,.4); border-radius: 8px;
+    padding: 26px 30px 24px; margin-bottom: 40px; position: relative;
+    background: rgba(0,0,0,.10);
+  }
+  .entry .head { display: flex; align-items: center; gap: 18px; margin-bottom: 6px; }
+  .medallion { flex: 0 0 auto; }
+  .entry h2 { font-size: 30px; color: var(--chalk); font-weight: 400; line-height: 1.15; }
+  .entry .meta { font-size: 13.5px; color: var(--chalk-faint); font-style: italic; margin-top: 3px; }
+  .sigline {
+    color: var(--yellow); font-size: 19px; margin: 14px 0 14px; line-height: 1.5;
+    text-shadow: 0 0 5px rgba(232,212,139,.22);
+  }
+  .bio { font-size: 15.5px; color: var(--chalk-dim); margin-bottom: 8px; }
+  .lifeline { margin: 16px 0 6px; }
+  .lifeline svg { display: block; width: 100%; height: auto; }
+  h3.sect {
+    color: var(--chalk); font-size: 15px; letter-spacing: .24em; font-weight: 400;
+    margin: 20px 0 8px;
+  }
+  .idea { margin-bottom: 13px; font-size: 15.5px; }
+  .idea b { color: var(--chalk); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; align-items: center; }
+  .chips .lab { font-size: 12.5px; color: var(--chalk-faint); font-style: italic; }
+  .chip {
+    font-size: 13px; color: var(--chalk-dim); padding: 3px 13px; border-radius: 999px;
+    border: 1.6px solid rgba(234,231,220,.55);
+  }
+  .chip.dashed { border-style: dashed; }
+  .tools { margin-top: 18px; font-size: 13.5px; color: var(--chalk-faint); }
+  .tools span { border-bottom: 1px dashed rgba(234,231,220,.4); margin-right: 16px; }
+
+  /* ---- idea card ---- */
+  .ideacard { border-color: rgba(224,169,164,.5); }
+  .ideacard .head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+  .ideacard h2 { font-size: 24px; color: var(--chalk); font-weight: 400; letter-spacing: .12em; }
+  .ideacard .meta { font-size: 13.5px; color: var(--chalk-faint); font-style: italic; margin: 4px 0 14px; }
+  .ideacard .diagram { flex: 0 0 auto; margin-top: 2px; }
+  .sec { margin-bottom: 14px; font-size: 15.5px; }
+  .sec .cap {
+    display: block; font-size: 12.5px; letter-spacing: .3em; margin-bottom: 3px;
+  }
+  .sec.spark .cap { color: var(--yellow); }
+  .sec.move  .cap { color: var(--rose); }
+  .sec.world .cap { color: var(--blue); }
+  .ideacard .chip { border-color: rgba(224,169,164,.6); }
+  .ideacard .chip.genea { border-color: rgba(169,199,217,.6); }
+
+  footer { text-align: center; color: var(--chalk-faint); font-size: 12.5px; font-style: italic; opacity: .8; }
+
+  @media (max-width: 560px) {
+    header h1 { font-size: 32px; }
+    .entry, .ideacard { padding: 20px 18px; }
+    .ideacard .head { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="grain" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain)"/></svg>
+<div class="smudge" style="width:420px;height:230px;top:12%;left:-90px"></div>
+<div class="smudge" style="width:360px;height:220px;bottom:8%;right:-70px"></div>
+
+<!-- shared chalk filters -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="rough" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+    </filter>
+    <filter id="rough2" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6"/>
+    </filter>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header>
+  <h1 class="chalkf chalk-glow">MATHESIS</h1>
+  <div class="tag">a history of mathematical ideas — theory, never computation</div>
+  <svg class="rule" viewBox="0 0 400 14" aria-hidden="true">
+    <path d="M8,7 C80,4 160,10 200,7 C240,4 320,10 392,7" fill="none" stroke="#eae7dc" stroke-width="1.6" stroke-linecap="round" opacity=".6" filter="url(#rough)"/>
+  </svg>
+</header>
+
+<!-- ═══════════ THE CHALK GLOBE ═══════════ -->
+<div class="globeblock">
+  <div class="lenschip chalkf">lens: 1600–1730 ✕</div>
+  <div class="zoomcol chalkf"><div>＋</div><div>－</div><div>✳</div></div>
+
+  <svg class="globe" viewBox="0 0 720 540" aria-label="chalk globe">
+    <defs>
+      <clipPath id="disc"><circle cx="330" cy="262" r="222"/></clipPath>
+    </defs>
+
+    <!-- sphere -->
+    <g stroke="#eae7dc" fill="none" stroke-linecap="round" filter="url(#rough2)">
+      <circle cx="330" cy="262" r="222" stroke-width="2.6" opacity=".85"/>
+      <circle cx="330" cy="262" r="222" stroke-width="1" opacity=".25" transform="rotate(1.2 330 262)"/>
+    </g>
+
+    <!-- graticule -->
+    <g clip-path="url(#disc)" stroke="#eae7dc" fill="none" stroke-width="1" opacity=".18" filter="url(#rough)">
+      <ellipse cx="330" cy="262" rx="82" ry="222"/>
+      <ellipse cx="330" cy="262" rx="160" ry="222"/>
+      <ellipse cx="330" cy="192" rx="211" ry="30"/>
+      <ellipse cx="330" cy="262" rx="222" ry="34"/>
+      <ellipse cx="330" cy="338" rx="205" ry="30"/>
+    </g>
+
+    <!-- coastlines, teacher-sketch style -->
+    <g clip-path="url(#disc)" stroke="#eae7dc" fill="none" stroke-width="1.7" stroke-linecap="round" opacity=".55" filter="url(#rough)">
+      <!-- north Mediterranean coast: Iberia → Italy → Greece → Anatolia → Levant -->
+      <path d="M158,214 C185,196 210,204 228,193 C246,183 262,194 276,203 C287,222 293,234 289,247 C298,238 312,241 317,251 C328,240 344,235 362,231 C376,236 383,251 388,266"/>
+      <!-- north Africa coast -->
+      <path d="M150,270 C196,284 246,292 294,293 C332,294 362,285 388,271"/>
+      <!-- northern Europe hint -->
+      <path d="M215,152 C236,143 254,149 268,142 C284,135 300,139 312,146"/>
+      <!-- Black Sea hint -->
+      <path d="M352,214 C366,208 379,210 391,217"/>
+      <!-- Arabia -->
+      <path d="M397,276 C406,296 419,313 436,319 C447,301 453,286 449,272 C431,267 410,268 397,276"/>
+      <!-- Persia strokes -->
+      <path d="M403,242 C418,236 436,237 452,244"/>
+      <!-- India -->
+      <path d="M468,288 C476,310 481,331 492,347 C503,333 510,312 507,291 C494,284 479,284 468,288"/>
+    </g>
+
+    <!-- influence arcs: dashed = drew from, solid = shaped -->
+    <g fill="none" stroke-linecap="round" filter="url(#rough)">
+      <path d="M295,256 Q272,240 281,221" stroke="#eae7dc" stroke-width="1.8" stroke-dasharray="7 6" opacity=".8"/>
+      <path d="M281,221 Q230,182 245,142" stroke="#eae7dc" stroke-width="2" opacity=".9"/>
+    </g>
+
+    <!-- thinker points -->
+    <g fill="#f2efe6" stroke="none" filter="url(#rough)">
+      <circle cx="338" cy="246" r="4"/><!-- Athens -->
+      <circle cx="362" cy="277" r="4"/><!-- Alexandria -->
+      <circle cx="295" cy="256" r="4"/><!-- Syracuse -->
+      <circle cx="420" cy="261" r="4"/><!-- Baghdad -->
+      <circle cx="487" cy="300" r="4"/><!-- Ujjain -->
+      <circle cx="262" cy="184" r="3.4" opacity=".8"/><!-- Basel -->
+      <circle cx="284" cy="164" r="3.4" opacity=".8"/><!-- Göttingen -->
+      <circle cx="245" cy="142" r="4"/><!-- Cambridge -->
+      <circle cx="445" cy="238" r="3.4" opacity=".8"/><!-- Nishapur -->
+      <circle cx="281" cy="221" r="5.5"/><!-- Pisa: selected -->
+    </g>
+    <!-- selection + connection rings -->
+    <g fill="none" stroke-linecap="round" filter="url(#rough)">
+      <circle cx="281" cy="221" r="11" stroke="#e8d48b" stroke-width="1.7" stroke-dasharray="5 5" opacity=".95"/>
+      <circle cx="295" cy="256" r="8" stroke="#e0a9a4" stroke-width="1.3" stroke-dasharray="4 5" opacity=".8"/>
+      <circle cx="245" cy="142" r="8" stroke="#e0a9a4" stroke-width="1.3" stroke-dasharray="4 5" opacity=".8"/>
+    </g>
+
+    <!-- labels -->
+    <g font-family="Chalkduster, 'Chalkboard SE', cursive" fill="#d9d6c9" font-size="12.5">
+      <text x="296" y="214" fill="#eae7dc" font-size="14.5">Galileo</text>
+      <text x="303" y="273">Archimedes</text>
+      <text x="371" y="292">Euclid</text>
+      <text x="429" y="255">al-Khwarizmi</text>
+      <text x="466" y="323">Brahmagupta</text>
+      <text x="254" y="132">Newton</text>
+    </g>
+  </svg>
+</div>
+
+<!-- era scrubber -->
+<div class="scrub">
+  <svg viewBox="0 0 720 58" aria-label="era scrubber">
+    <g stroke="#eae7dc" stroke-linecap="round" fill="none" filter="url(#rough)">
+      <path d="M30,30 L690,30" stroke-width="1.6" opacity=".45"/>
+      <path d="M474,30 L512,30" stroke="#e8d48b" stroke-width="4" opacity=".95"/>
+      <g stroke-width="1.3" opacity=".5">
+        <path d="M30,24 L30,36"/><path d="M120,24 L120,36"/><path d="M232,24 L232,36"/>
+        <path d="M330,24 L330,36"/><path d="M420,24 L420,36"/><path d="M474,24 L474,36"/>
+        <path d="M512,24 L512,36"/><path d="M568,24 L568,36"/><path d="M634,24 L634,36"/><path d="M690,24 L690,36"/>
+      </g>
+      <circle cx="493" cy="30" r="7" stroke="#e8d48b" stroke-width="1.8"/>
+    </g>
+    <g font-family="Chalkduster,'Chalkboard SE',cursive" fill="#8a887e" font-size="9.5">
+      <text x="18" y="52">Origins</text><text x="98" y="52">Greek Miracle</text>
+      <text x="205" y="52">Wisdom</text><text x="305" y="52">Renaissance</text>
+      <text x="448" y="52" fill="#a9c7d9">Revolution</text><text x="540" y="52">Rigor</text>
+      <text x="608" y="52">Foundations</text><text x="662" y="52">Modern</text>
+    </g>
+  </svg>
+  <div class="readout">
+    <span class="era chalkf">THE SCIENTIFIC REVOLUTION</span><br>
+    <span class="span">1600 – 1730 · the world becomes an equation</span>
+  </div>
+</div>
+
+<!-- ═══════════ PERSON ENTRY ═══════════ -->
+<div class="entry">
+  <div class="head">
+    <svg class="medallion" width="72" height="72" viewBox="0 0 72 72" aria-label="chalk portrait placeholder">
+      <g stroke="#eae7dc" fill="none" stroke-linecap="round" filter="url(#rough)">
+        <circle cx="36" cy="36" r="33" stroke-width="1.8" opacity=".8"/>
+        <circle cx="36" cy="28" r="11" stroke-width="1.5" opacity=".75"/>
+        <path d="M16,60 C20,44 30,41 36,41 C42,41 52,44 56,60" stroke-width="1.5" opacity=".75"/>
+        <path d="M28,22 C30,17 42,17 44,22" stroke-width="1.2" opacity=".55"/>
+      </g>
+    </svg>
+    <div>
+      <h2 class="chalkf chalk-glow">Galileo Galilei</h2>
+      <div class="meta">1564 – 1642 · Pisa → Florence · The Scientific Revolution</div>
+    </div>
+  </div>
+
+  <div class="sigline chalkf">“The book of nature is written in the language of mathematics.”</div>
+
+  <p class="bio">A lutenist’s son who turned a Dutch spyglass to the sky and a water-clock on a
+  rolling ball. The telescope made him famous and the Inquisition made him a prisoner, but his
+  deeper act was quieter: insisting that the fall of a stone is not a quality to be debated but a
+  law to be written — and that the writing is mathematics.</p>
+
+  <div class="lifeline">
+    <svg viewBox="0 0 660 84" aria-label="lifeline">
+      <g font-family="Chalkduster,'Chalkboard SE',cursive" font-size="9.5" fill="#8a887e">
+        <text x="40" y="14">Archimedes ↧</text>
+        <text x="150" y="14">Euclid ↧</text>
+        <text x="440" y="80">↥ Newton</text>
+      </g>
+      <g stroke="#eae7dc" stroke-linecap="round" fill="none" filter="url(#rough)">
+        <circle cx="34" cy="20" r="3" fill="#eae7dc" stroke="none"/>
+        <circle cx="144" cy="20" r="3" fill="#eae7dc" stroke="none"/>
+        <circle cx="434" cy="66" r="3" fill="#eae7dc" stroke="none"/>
+        <path d="M20,43 L640,43" stroke-width="1.2" opacity=".35"/>
+        <path d="M302,43 L427,43" stroke-width="4.5" opacity=".95"/>
+        <path d="M20,56 L424,56" stroke="#a9c7d9" stroke-width="1.2" opacity=".4"/>
+        <path d="M360,62 L544,62" stroke="#e8d48b" stroke-width="1.2" opacity=".5"/>
+      </g>
+      <g font-size="9.5" font-family="Iowan Old Style,Palatino,serif" font-style="italic" fill="#8a887e">
+        <text x="290" y="36">1564</text><text x="418" y="36">1642</text>
+        <text x="22" y="70" fill="#7e94a3">Renaissance</text>
+        <text x="474" y="74" fill="#a39a6f">Revolution</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3 class="sect chalkf">KEY IDEAS</h3>
+  <div class="idea"><b>Nature speaks mathematics.</b> Roll a ball down a ramp and the distances
+  grow as the odd numbers — 1, 3, 5, 7 — the square law hiding inside plain falling. His claim
+  that the physical world obeys number at bottom is the founding bet of modern science; every
+  equation of physics since is that bet paying off.</div>
+  <div class="idea"><b>Galileo’s paradox.</b> Every number has a square, so there are exactly as
+  many squares as numbers — yet almost no numbers are squares. He concluded that infinite
+  collections defy comparison. Cantor picked up the same pairing 250 years later and built the
+  sizes of infinity from it.</div>
+
+  <div class="chips">
+    <span class="lab">drew from</span>
+    <span class="chip dashed">Archimedes</span><span class="chip dashed">Euclid</span>
+    <span class="lab">shaped</span>
+    <span class="chip">Newton</span>
+  </div>
+
+  <div class="tools chalkf"><span>converse with Galileo</span><span>symposium</span><span>❧ clip</span></div>
+</div>
+
+<!-- ═══════════ IDEA CARD ═══════════ -->
+<div class="ideacard">
+  <div class="head">
+    <div>
+      <h2 class="chalkf chalk-glow">THE VANISHING POINT</h2>
+      <div class="meta">an idea · Florence, 1420s · perspective → projective geometry</div>
+    </div>
+    <svg class="diagram" width="170" height="104" viewBox="0 0 170 104" aria-label="perspective sketch">
+      <g stroke="#e0a9a4" fill="none" stroke-linecap="round" filter="url(#rough)">
+        <path d="M8,30 L162,30" stroke-width="1.2" opacity=".55"/>
+        <path d="M12,96 L98,31" stroke-width="1.6" opacity=".85"/>
+        <path d="M158,96 L102,31" stroke-width="1.6" opacity=".85"/>
+        <path d="M44,72 L126,72" stroke-width="1.1" opacity=".5"/>
+        <path d="M68,54 L112,54" stroke-width="1.1" opacity=".5"/>
+        <path d="M82,42 L104,42" stroke-width="1.1" opacity=".5"/>
+        <circle cx="100" cy="30" r="3.4" fill="#e0a9a4" stroke="none"/>
+      </g>
+      <text x="108" y="22" font-family="Chalkduster,'Chalkboard SE',cursive" font-size="13" fill="#e0a9a4">∞</text>
+    </svg>
+  </div>
+
+  <div class="sec spark"><span class="cap chalkf">SPARK</span>
+  How do you paint depth onto a flat wall? In the 1420s Brunelleschi stood at the door of
+  Florence’s cathedral with a painted panel and a mirror and showed there is an exact geometric
+  answer — every set of parallel edges in the world aims at one point in the picture.</div>
+
+  <div class="sec move"><span class="cap chalkf">MOVE</span>
+  Take Euclid’s plane and add the points where parallels meet. Every family of parallel lines now
+  shares one <i>point at infinity</i>, and the horizon is simply the line that collects them. Two
+  centuries later Desargues turned the painters’ device into a geometry of its own — projective
+  geometry, where there are no parallels at all.</div>
+
+  <div class="sec world"><span class="cap chalkf">WORLD</span>
+  Parallel lines meeting was the first crack in the belief that Euclid’s geometry is <i>the</i>
+  geometry rather than <i>a</i> geometry — a crack that widens into curved space. And the discovery
+  runs on your own hardware: stand between rails and watch them touch at the horizon. You are
+  watching your visual system do projective geometry in real time. Painters simply wrote it down
+  first.</div>
+
+  <div class="chips">
+    <span class="lab">its people</span>
+    <span class="chip">Brunelleschi</span><span class="chip">Alberti</span>
+    <span class="chip">Piero della Francesca</span><span class="chip">Desargues</span>
+    <span class="lab">leads to</span>
+    <span class="chip genea">curved space</span>
+  </div>
+</div>
+
+<footer>MATHESIS · M1 blackboard mockup · real chalk portraits, era emblems &amp; the idea web come in M2–M3</footer>
+
+</div>
+</body>
+</html>
