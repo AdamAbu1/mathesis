@@ -9,7 +9,9 @@ that sentence.
 Owner decisions (2026-07-21): people + first-class ideas · fork Philosophia's
 skeleton · new blackboard visual identity · global roster from day one · named
 Mathesis (mathesis universalis — Descartes/Leibniz's universal science of order) ·
-Lady Mathesis as the allegorical guide persona (chalk medallion).
+Lady Mathesis as the allegorical guide persona (chalk medallion) · Erdős and
+Conway on the roster · the vanishing point in the idea ledger · bench dissolved
+into carried-in-essays · **scope signed off 2026-07-21**.
 
 ## The two atoms
 
@@ -80,19 +82,27 @@ your view of reality, it doesn't ship.
 - **Age of Rigor**: Gauss, Cauchy, Abel, Galois, Lobachevsky, Riemann, Cantor,
   Boole, Kovalevskaya, Poincaré
 - **Foundations**: Hilbert, Noether, Ramanujan, Gödel
-- **Modern**: Turing, von Neumann, Kolmogorov, Shannon, Grothendieck,
-  Mandelbrot, Wiles, Mirzakhani
+- **Modern**: Turing, von Neumann, Kolmogorov, Erdős, Shannon, Grothendieck,
+  Mandelbrot, Conway, Wiles, Mirzakhani
 
-Count: 48. **Bench** (owner may swap in/out): Eudoxus, Diophantus,
-Zu Chongzhi, Bhaskara II, al-Tusi, Lagrange, Dedekind, Erdős, Conway,
-Piero della Francesca (see vanishing-point candidate below).
+Count: 50 (signed off 2026-07-21). No bench — near-misses live in the
+**carried-in-essays ledger**, each assigned to the entry that tells their story:
+Hippasus → the irrational · Eudoxus → Archimedes + the limit · Diophantus →
+Fermat (the margin was his book) + algebra · Zu Chongzhi → Liu Hui ·
+Bhaskara II → Brahmagupta/Madhava · al-Tusi → Khayyam + the parallel postulate
+falls · Brunelleschi, Alberti, Piero della Francesca, Desargues → the vanishing
+point · Lagrange → Euler + symmetry · Bolyai → Lobachevsky · Weierstrass,
+Dedekind → the limit + Cantor · Hardy → Ramanujan · Russell → sets + logic as
+calculation · Klein → symmetry · Lorenz → chaos · Wigner → the unreasonable
+effectiveness.
 Overlaps with Philosophia (Pythagoras, Hypatia, Descartes, Pascal, Leibniz) are
 fine — different app, different portrait style, different emphasis.
 
 ## Draft idea ledger (~24)
 
 counting · place-value & zero · proof · the axiomatic method · the irrational ·
-the infinite · algebra · symbolic thought · the coordinate plane · chance ·
+the infinite · algebra · the vanishing point · symbolic thought ·
+the coordinate plane · chance ·
 the calculus · the limit · the impossible number (complex) · the parallel
 postulate falls · curved space · symmetry (groups) · structure (abstraction) ·
 sets · logic as calculation · incompleteness · the machine (computability) ·
@@ -100,7 +110,8 @@ the primes · shape without size (topology) · the frequency domain (Fourier) ·
 chaos · information · **the unreasonable effectiveness** (capstone node — math
 and reality; the essay the whole app builds toward)
 
-That's 27 listed; trim to ~24 in the content pass. Genealogy edges are curated
+That's 28 listed; trim during the content pass only where an essay fails the
+`world` test — the count is a target, not a law. Genealogy edges are curated
 during writing, kept acyclic (test-enforced).
 
 ## Journeys (itinerary machinery, renamed)
@@ -157,7 +168,7 @@ Full re-theme, no engraved-paper carryover:
 
 ## Milestones
 
-- **M0** — this document, committed. ✅ Code gated on owner sign-off.
+- **M0** — this document; scope signed off 2026-07-21. ✅
 - **M1** — blackboard mockup (static, one screen: slate + chalk globe + one
   person entry + one idea card) → owner approves the look before re-theming.
 - **M2** — fork skeleton, strip philosophy content, re-theme, data model for
@@ -165,14 +176,10 @@ Full re-theme, no engraved-paper carryover:
 - **M3** — content pass: all person entries, all idea essays (spark/move/world),
   journeys, portraits + emblems generated.
 - **M4** — Ask Mathesis (guide/persona/symposium), voice, codex, daily line.
-- **M5** — deploy (new GitHub Pages repo), phone install manifest.
+- **M5** — deploy to https://github.com/AdamAbu1/mathesis (Pages), phone
+  install manifest.
 
 ## Open questions for the owner
 
-1. Bench: recommend dissolving into a "carried in essays" ledger (each
-   near-miss assigned to the entry that tells their story). Ruling pending.
-   Live roster calls nobody else carries: Erdős in/out, Conway in/out.
-2. Idea ledger cuts to reach ~24 — anything skippable, anything missing?
-   Candidate addition: **the vanishing point** — Renaissance perspective →
-   projective geometry (parallel lines meet at infinity); the honest vehicle
-   for what da Vinci represents (owner ruling pending).
+None — all founding questions resolved; scope signed off 2026-07-21. New
+product decisions get appended to the owner-decisions ledger at the top.
