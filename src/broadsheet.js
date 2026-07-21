@@ -48,7 +48,7 @@ export function wrapLines(text, maxWidth, measure) {
 const speakerName = who => (who === 'user' ? 'The Questioner' : byId[who].name)
 
 export function transcriptText(session) {
-  const head = `PHILOSOPHIA · A SYMPOSIUM\n${byId[session.a].name} & ${byId[session.b].name}\n“${session.question}”`
+  const head = `MATHESIS · A SYMPOSIUM\n${byId[session.a].name} & ${byId[session.b].name}\n“${session.question}”`
   const body = session.turns
     .map(t => `${speakerName(t.who).toUpperCase()} — ${t.text}`)
     .join('\n\n')

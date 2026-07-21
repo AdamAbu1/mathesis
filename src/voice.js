@@ -75,7 +75,7 @@ function hash(s) {
 
 // The records carry no gender field by design; this small set exists only so
 // voice casting doesn't hand the canon's women a baritone.
-const FEMALE_IDS = new Set(['hypatia', 'conway', 'arendt', 'beauvoir', 'weil', 'anscombe'])
+const FEMALE_IDS = new Set(['hypatia', 'germain', 'kovalevskaya', 'noether', 'mirzakhani'])
 export const isFemaleVoice = id => id == null || FEMALE_IDS.has(id) // null = Lady Mathesis, the guide
 
 // System-voice profile: deterministic, modest variation so personas differ.

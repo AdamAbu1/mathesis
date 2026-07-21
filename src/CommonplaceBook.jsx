@@ -2,6 +2,7 @@
 // codex section. Appears only once something has been clipped.
 import { useEffect, useState } from 'react'
 import { byId } from './data.js'
+import { ideaById } from './ideas.js'
 import { getClippings, removeClipping } from './codex.js'
 
 export default function CommonplaceBook({ onSelect }) {
@@ -37,9 +38,9 @@ export default function CommonplaceBook({ onSelect }) {
               <li key={e.id}>
                 <p className="codex-text">{e.text}</p>
                 <p className="codex-meta">
-                  {e.thinkerId && byId[e.thinkerId] && (
+                  {e.thinkerId && (byId[e.thinkerId] ?? ideaById[e.thinkerId]) && (
                     <button className="tchip" onClick={() => onSelect(e.thinkerId)}>
-                      {byId[e.thinkerId].name}
+                      {(byId[e.thinkerId] ?? ideaById[e.thinkerId]).name}
                     </button>
                   )}
                   <span>{date(e.savedAt)}</span>

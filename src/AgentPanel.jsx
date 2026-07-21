@@ -20,6 +20,7 @@ import {
   contextIds,
   buildUserTurn,
   parseMarkers,
+  chipName,
   streamReply,
 } from './agent.js'
 import { LIVING, livingSrc } from './living.js'
@@ -46,7 +47,7 @@ function Reply({ text, streaming, onSelect, label, onClip, clipped }) {
       {parseMarkers(text, { streaming }).map((seg, i) =>
         seg.type === 'chip' ? (
           <button key={i} className="tchip" onClick={() => onSelect(seg.id)}>
-            {byId[seg.id].name}
+            {chipName(seg.id)}
           </button>
         ) : (
           <span key={i}>{seg.text}</span>
@@ -111,7 +112,7 @@ export default function AgentPanel({ personaId, onExitPersona, selectedId, onSel
   const [speaking, setSpeaking] = useState(false)
   const [symp, setSymp] = useState(null) // {a, b} while a symposium sits
   const [sympSetup, setSympSetup] = useState(false)
-  const [sympDraft, setSympDraft] = useState({ a: 'socrates', b: 'nietzsche', q: '' })
+  const [sympDraft, setSympDraft] = useState({ a: 'newton', b: 'leibniz', q: '' })
   const [shareMenu, setShareMenu] = useState(null)
   const [publishing, setPublishing] = useState(false)
   const [clippedMsgs, setClippedMsgs] = useState(() => new Set())
@@ -525,7 +526,7 @@ export default function AgentPanel({ personaId, onExitPersona, selectedId, onSel
     setSympDraft(d => ({
       ...d,
       a: personaId ?? selectedId ?? d.a,
-      b: (personaId ?? selectedId) === d.b ? (d.b === 'nietzsche' ? 'buddha' : 'nietzsche') : d.b,
+      b: (personaId ?? selectedId) === d.b ? (d.b === 'leibniz' ? 'euler' : 'leibniz') : d.b,
     }))
   }
 
@@ -537,10 +538,19 @@ export default function AgentPanel({ personaId, onExitPersona, selectedId, onSel
             <img
               className={speaking ? 'agent-medallion speaking' : 'agent-medallion'}
               src={persona ? persona.thumb : 'portraits/mathesis.jpg'}
-              alt={persona ? `Engraved portrait of ${persona.name}` : 'Lady Mathesis, in chalk'}
+              alt={persona ? `Chalk portrait of ${persona.name}` : 'Lady Mathesis, in chalk'}
+              onError={e => {
+                // Chalk-bust placeholder until the M3 portrait set lands.
+                e.currentTarget.onerror = null
+                e.currentTarget.src =
+                  'data:image/svg+xml,' +
+                  encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 46"><rect width="46" height="46" fill="#1c2823"/><g stroke="#eae7dc" fill="none" stroke-linecap="round" opacity=".8"><circle cx="23" cy="17" r="7" stroke-width="1.3"/><path d="M10,38 C13,28 19,26 23,26 C27,26 33,28 36,38" stroke-width="1.3"/></g></svg>`,
+                  )
+              }}
             />
           )}
-          <h2>ASK PHILOSOPHIA</h2>
+          <h2>ASK MATHESIS</h2>
           {symp ? (
             <span className="agent-mode">
               symposium: {byId[symp.a].name} &amp; {byId[symp.b].name}

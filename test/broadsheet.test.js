@@ -55,7 +55,7 @@ describe('transcript & tweet', () => {
   const s = sessionFromMessages(messages, symp)
   it('transcript carries names, question, attributed turns, and the site', () => {
     const t = transcriptText(s)
-    expect(t).toContain('PHILOSOPHIA · A SYMPOSIUM')
+    expect(t).toContain('MATHESIS · A SYMPOSIUM')
     expect(t).toContain('“Is suffering good for us?”')
     expect(t).toContain('SOCRATES — Let us first ask')
     expect(t).toContain('THE QUESTIONER — Answer plainly')

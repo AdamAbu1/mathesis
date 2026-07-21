@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { MATHEMATICIANS, byId } from './data.js'
-import { searchFigures } from './search.js'
+import { IDEAS } from './ideas.js'
+import { searchAll } from './search.js'
 import { fmtRange } from './format.js'
 
 export default function SearchBox({ onSelect }) {
@@ -8,7 +9,7 @@ export default function SearchBox({ onSelect }) {
   const [open, setOpen] = useState(false)
   const [idx, setIdx] = useState(0)
   const inputRef = useRef(null)
-  const results = q ? searchFigures(q, MATHEMATICIANS) : []
+  const results = q ? searchAll(q, MATHEMATICIANS, IDEAS) : []
 
   // "/" focuses search from anywhere outside a text field.
   useEffect(() => {
@@ -49,8 +50,8 @@ export default function SearchBox({ onSelect }) {
       <input
         ref={inputRef}
         type="text"
-        placeholder="search thinkers · /"
-        aria-label="Search philosophers"
+        placeholder="search figures & ideas · /"
+        aria-label="Search mathematicians and ideas"
         value={q}
         onChange={e => {
           setQ(e.target.value)
@@ -75,8 +76,8 @@ export default function SearchBox({ onSelect }) {
             >
               <span className="rname">{r.name}</span>
               <span className="rmeta">
-                {fmtRange(byId[r.id])}
-                {r.label ? ` · ${r.label}` : ''}
+                {r.kind === 'idea' ? (r.label ?? 'an idea') : fmtRange(byId[r.id])}
+                {r.kind !== 'idea' && r.label ? ` · ${r.label}` : ''}
               </span>
             </li>
           ))}
