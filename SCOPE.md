@@ -8,7 +8,8 @@ that sentence.
 
 Owner decisions (2026-07-21): people + first-class ideas · fork Philosophia's
 skeleton · new blackboard visual identity · global roster from day one · named
-Mathesis (mathesis universalis — Descartes/Leibniz's universal science of order).
+Mathesis (mathesis universalis — Descartes/Leibniz's universal science of order) ·
+Lady Mathesis as the allegorical guide persona (chalk medallion).
 
 ## The two atoms
 
@@ -168,9 +169,10 @@ Full re-theme, no engraved-paper carryover:
 
 ## Open questions for the owner
 
-1. Roster/bench swaps? (Erdős in? Dedekind in?) Galileo promoted 2026-07-21.
+1. Bench: recommend dissolving into a "carried in essays" ledger (each
+   near-miss assigned to the entry that tells their story). Ruling pending.
+   Live roster calls nobody else carries: Erdős in/out, Conway in/out.
 2. Idea ledger cuts to reach ~24 — anything skippable, anything missing?
    Candidate addition: **the vanishing point** — Renaissance perspective →
    projective geometry (parallel lines meet at infinity); the honest vehicle
    for what da Vinci represents (owner ruling pending).
-3. "Lady Mathesis" as the guide persona, or a historical guide (e.g., Hypatia)?
