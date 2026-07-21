@@ -20,7 +20,7 @@ export const ERAS = [
 // edges.js and drawn as an arc on the globe.
 const ROSTER = [
   // ---- Origins ----
-  { id: 'ahmes', name: 'Ahmes', born: -1680, died: -1620, era: 'ori', school: 'Egyptian reckoning', tradition: 'egypt',
+  { id: 'ahmes', name: 'Ahmes', born: -1620, died: -1550, era: 'ori', school: 'Egyptian reckoning', tradition: 'egypt',
     blurb: 'The scribe of the Rhind papyrus and the first mathematician whose name we know — a copyist, he tells us, of writings two centuries older still. Fractions, areas, and the pyramid problems of a working river civilization.',
     line: 'Accurate reckoning: the entrance into knowledge of all existing things.', influences: [] },
 
