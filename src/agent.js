@@ -174,6 +174,10 @@ export function contextIds(query, { personaId = null, selectedId = null, lastRep
       .filter(r => r.rank <= 3)
       .slice(0, 2)
       .forEach(r => add(r.id))
+    searchIdeas(w, IDEAS)
+      .filter(r => r.rank <= 1)
+      .slice(0, 1)
+      .forEach(r => add(r.id))
   }
   return ids.slice(0, 9)
 }

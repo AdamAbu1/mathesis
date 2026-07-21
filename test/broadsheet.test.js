@@ -8,13 +8,13 @@ import {
   SITE,
 } from '../src/broadsheet.js'
 
-const symp = { a: 'socrates', b: 'nietzsche' }
+const symp = { a: 'newton', b: 'leibniz' }
 const messages = [
   { role: 'user', question: 'Is suffering good for us?' },
-  { role: 'assistant', speakerId: 'socrates', text: 'Let us first ask what [[nietzsche]] means by good.', blocks: [] },
+  { role: 'assistant', speakerId: 'newton', text: 'Let us first ask what [[leibniz]] means by good.', blocks: [] },
   { role: 'user', question: 'Answer plainly, both of you.' },
-  { role: 'assistant', speakerId: 'nietzsche', text: 'Plainly then: yes.', blocks: [] },
-  { role: 'assistant', speakerId: 'socrates', text: '', streaming: true }, // dropped
+  { role: 'assistant', speakerId: 'leibniz', text: 'Plainly then: yes.', blocks: [] },
+  { role: 'assistant', speakerId: 'newton', text: '', streaming: true }, // dropped
 ]
 
 describe('sessionFromMessages', () => {
@@ -22,12 +22,12 @@ describe('sessionFromMessages', () => {
     const s = sessionFromMessages(messages, symp)
     expect(s.question).toBe('Is suffering good for us?')
     expect(s.turns).toEqual([
-      { who: 'socrates', text: `Let us first ask what ${byId.nietzsche.name} means by good.` },
+      { who: 'newton', text: `Let us first ask what ${byId.leibniz.name} means by good.` },
       { who: 'user', text: 'Answer plainly, both of you.' },
-      { who: 'nietzsche', text: 'Plainly then: yes.' },
+      { who: 'leibniz', text: 'Plainly then: yes.' },
     ])
-    expect(s.a).toBe('socrates')
-    expect(s.b).toBe('nietzsche')
+    expect(s.a).toBe('newton')
+    expect(s.b).toBe('leibniz')
   })
 })
 
@@ -57,14 +57,14 @@ describe('transcript & tweet', () => {
     const t = transcriptText(s)
     expect(t).toContain('MATHESIS · A SYMPOSIUM')
     expect(t).toContain('“Is suffering good for us?”')
-    expect(t).toContain('SOCRATES — Let us first ask')
+    expect(t).toContain('NEWTON — Let us first ask')
     expect(t).toContain('THE QUESTIONER — Answer plainly')
     expect(t).toContain(SITE)
   })
   it('tweet url embeds question, names, and link', () => {
     const u = tweetUrl(s)
     expect(u).toContain('twitter.com/intent/tweet')
-    expect(decodeURIComponent(u)).toContain('Socrates & Nietzsche')
+    expect(decodeURIComponent(u)).toContain('Newton & Leibniz')
     expect(decodeURIComponent(u)).toContain(SITE)
   })
 })

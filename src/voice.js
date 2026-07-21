@@ -90,14 +90,16 @@ export function voiceProfileFor(id) {
 // Ancients and medievals should sound aged; early moderns middle-aged; only
 // the 20th century may draw a young voice. null = any age (the guide included).
 const AGE_PREF = {
-  pre: ['old', 'middle_aged'],
-  cla: ['old', 'middle_aged'],
-  hel: ['old', 'middle_aged'],
-  med: ['old', 'middle_aged'],
+  ori: ['old', 'middle_aged'],
+  gre: ['old', 'middle_aged'],
+  eas: ['old', 'middle_aged'],
+  isl: ['old', 'middle_aged'],
   ren: ['middle_aged', 'old'],
+  rev: ['middle_aged', 'old'],
   enl: ['middle_aged', 'old'],
-  c19: ['middle_aged', 'old'],
-  c20: null,
+  rig: ['middle_aged', 'old'],
+  fou: ['middle_aged', 'old'],
+  mod: null,
 }
 const agePrefFor = id => (id == null ? null : AGE_PREF[byId[id]?.era] ?? null)
 
@@ -107,19 +109,14 @@ const agePrefFor = id => (id == null ? null : AGE_PREF[byId[id]?.era] ?? null)
 // prefers non-American voices — but only once the library holds at least
 // MIN_ACCENT_BENCH of them, so a default (US-heavy) library doesn't collapse
 // the whole ancient world onto two British narrators.
-const AMERICAN_IDS = new Set(['james', 'peirce', 'quine', 'rawls', 'searle', 'kripke'])
-const BRITISH_IDS = new Set([
-  'bacon', 'hobbes', 'locke', 'berkeley', 'hume', 'bentham', 'mill',
-  'russell', 'wollstonecraft', 'anscombe',
-])
+const AMERICAN_IDS = new Set(['shannon'])
+const BRITISH_IDS = new Set(['napier', 'newton', 'boole', 'turing', 'conway', 'wiles'])
 const BRITISH_ACCENTS = ['british', 'english', 'scottish', 'irish', 'welsh', 'australian']
 const TRADITION_ACCENTS = {
-  chinese: ['chinese'],
-  indian: ['indian'],
-  islamic: ['arabic', 'persian', 'turkish', 'egyptian'],
-  jewish: ['hebrew', 'israeli'],
-  japanese: ['japanese'],
-  african: ['african', 'nigerian', 'ethiopian'],
+  china: ['chinese'],
+  india: ['indian'],
+  islam: ['arabic', 'persian', 'turkish', 'egyptian'],
+  egypt: ['egyptian', 'arabic'],
 }
 const MIN_ACCENT_BENCH = 3
 

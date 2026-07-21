@@ -12,8 +12,8 @@ import {
 
 describe('speakableText', () => {
   it('replaces canon markers with names and collapses whitespace', () => {
-    expect(speakableText('[[socrates]] taught [[plato]].\n\nBoth mattered.')).toBe(
-      'Socrates taught Plato. Both mattered.',
+    expect(speakableText('[[euclid]] taught [[archimedes]].\n\nBoth mattered.')).toBe(
+      'Euclid taught Archimedes. Both mattered.',
     )
   })
   it('leaves unknown markers literal', () => {
@@ -68,8 +68,8 @@ describe('flushRemainder', () => {
 
 describe('voice casting', () => {
   it('system profiles are deterministic and within range', () => {
-    const a = voiceProfileFor('socrates')
-    expect(voiceProfileFor('socrates')).toEqual(a)
+    const a = voiceProfileFor('euclid')
+    expect(voiceProfileFor('euclid')).toEqual(a)
     expect(a.pitch).toBeGreaterThanOrEqual(0.85)
     expect(a.pitch).toBeLessThanOrEqual(1.25)
     expect(a.rate).toBeGreaterThanOrEqual(0.9)
@@ -77,13 +77,13 @@ describe('voice casting', () => {
   })
 
   it('distinct thinkers usually get distinct profiles', () => {
-    expect(voiceProfileFor('socrates')).not.toEqual(voiceProfileFor('nietzsche'))
+    expect(voiceProfileFor('euclid')).not.toEqual(voiceProfileFor('galileo'))
   })
 
   it('the guide and the canon women cast female voices', () => {
     expect(isFemaleVoice(null)).toBe(true)
-    expect(isFemaleVoice('arendt')).toBe(true)
-    expect(isFemaleVoice('socrates')).toBe(false)
+    expect(isFemaleVoice('noether')).toBe(true)
+    expect(isFemaleVoice('euclid')).toBe(false)
   })
 
   it('elevenVoiceFor matches gender and is deterministic', () => {
@@ -92,15 +92,15 @@ describe('voice casting', () => {
       { voice_id: 'v2', labels: { gender: 'female' } },
       { voice_id: 'v3', labels: { gender: 'male' } },
     ]
-    const pick = elevenVoiceFor('socrates', voices)
+    const pick = elevenVoiceFor('euclid', voices)
     expect(['v1', 'v3']).toContain(pick.voice_id)
-    expect(elevenVoiceFor('socrates', voices)).toEqual(pick)
-    expect(elevenVoiceFor('arendt', voices).voice_id).toBe('v2')
+    expect(elevenVoiceFor('euclid', voices)).toEqual(pick)
+    expect(elevenVoiceFor('noether', voices).voice_id).toBe('v2')
   })
 
   it('falls back to the whole pool when no gender matches', () => {
     const voices = [{ voice_id: 'v9', labels: {} }]
-    expect(elevenVoiceFor('arendt', voices).voice_id).toBe('v9')
+    expect(elevenVoiceFor('noether', voices).voice_id).toBe('v9')
   })
 
   it('ancients prefer aged voices over young ones', () => {
@@ -108,8 +108,8 @@ describe('voice casting', () => {
       { voice_id: 'a1', labels: { gender: 'male', age: 'young' } },
       { voice_id: 'a2', labels: { gender: 'male', age: 'old' } },
     ]
-    expect(elevenVoiceFor('socrates', voices).voice_id).toBe('a2')
-    expect(elevenVoiceFor('confucius', voices).voice_id).toBe('a2')
+    expect(elevenVoiceFor('euclid', voices).voice_id).toBe('a2')
+    expect(elevenVoiceFor('liuhui', voices).voice_id).toBe('a2')
   })
 
   it('enlightenment thinkers avoid young voices when older exist', () => {
@@ -117,17 +117,17 @@ describe('voice casting', () => {
       { voice_id: 'b1', labels: { gender: 'male', age: 'young' } },
       { voice_id: 'b2', labels: { gender: 'male', age: 'middle_aged' } },
     ]
-    expect(elevenVoiceFor('kant', voices).voice_id).toBe('b2')
+    expect(elevenVoiceFor('euler', voices).voice_id).toBe('b2')
   })
 
   it('20th-century thinkers may cast young voices', () => {
     const voices = [{ voice_id: 'c1', labels: { gender: 'female', age: 'young' } }]
-    expect(elevenVoiceFor('beauvoir', voices).voice_id).toBe('c1')
+    expect(elevenVoiceFor('mirzakhani', voices).voice_id).toBe('c1')
   })
 
   it('falls back to any age when the library has no aged voices', () => {
     const voices = [{ voice_id: 'd1', labels: { gender: 'male', age: 'young' } }]
-    expect(elevenVoiceFor('socrates', voices).voice_id).toBe('d1')
+    expect(elevenVoiceFor('euclid', voices).voice_id).toBe('d1')
   })
 
   it('canon Americans lock to American voices', () => {
@@ -135,7 +135,7 @@ describe('voice casting', () => {
       { voice_id: 'e1', labels: { gender: 'male', age: 'middle_aged', accent: 'british' } },
       { voice_id: 'e2', labels: { gender: 'male', age: 'middle_aged', accent: 'american' } },
     ]
-    expect(elevenVoiceFor('searle', voices).voice_id).toBe('e2')
+    expect(elevenVoiceFor('shannon', voices).voice_id).toBe('e2')
   })
 
   it('British Isles thinkers pin British accents even from a tiny bench', () => {
@@ -143,7 +143,7 @@ describe('voice casting', () => {
       { voice_id: 'f1', labels: { gender: 'male', age: 'middle_aged', accent: 'american' } },
       { voice_id: 'f2', labels: { gender: 'male', age: 'middle_aged', accent: 'british' } },
     ]
-    expect(elevenVoiceFor('hume', voices).voice_id).toBe('f2')
+    expect(elevenVoiceFor('newton', voices).voice_id).toBe('f2')
   })
 
   it('tradition accents match when the library offers them', () => {
@@ -151,16 +151,16 @@ describe('voice casting', () => {
       { voice_id: 'g1', labels: { gender: 'male', age: 'old', accent: 'american' } },
       { voice_id: 'g2', labels: { gender: 'male', age: 'old', accent: 'chinese' } },
     ]
-    expect(elevenVoiceFor('confucius', voices).voice_id).toBe('g2')
+    expect(elevenVoiceFor('liuhui', voices).voice_id).toBe('g2')
   })
 
   it('old-world non-American preference needs a bench of three', () => {
     const am = a => ({ voice_id: a, labels: { gender: 'male', age: 'old', accent: 'american' } })
     const br = a => ({ voice_id: a, labels: { gender: 'male', age: 'old', accent: 'british' } })
     const thin = [am('h1'), am('h2'), br('h3'), br('h4')]
-    expect(accentPool('socrates', thin)).toEqual(thin) // 2 accented — guard holds
+    expect(accentPool('euclid', thin)).toEqual(thin) // 2 accented — guard holds
     const rich = [am('h1'), br('h3'), br('h4'), br('h5')]
-    expect(accentPool('socrates', rich).every(v => v.labels.accent === 'british')).toBe(true)
+    expect(accentPool('euclid', rich).every(v => v.labels.accent === 'british')).toBe(true)
   })
 
   it('the guide is placeless — accent never narrows her pool', () => {
