@@ -41,7 +41,7 @@ export default function ItineraryBar({ trip, onStart, onStep, onEnd }) {
   return (
     <div className="itinerary">
       <button className="lenschip it-toggle" onClick={() => setOpen(o => !o)} aria-expanded={open}>
-        itineraries {open ? '✕' : '›'}
+        journeys {open ? '✕' : '›'}
       </button>
       {open && (
         <ul className="it-list">

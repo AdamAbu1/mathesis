@@ -85,7 +85,9 @@ your view of reality, it doesn't ship.
 - **Modern**: Turing, von Neumann, Kolmogorov, Erdős, Shannon, Grothendieck,
   Mandelbrot, Conway, Wiles, Mirzakhani
 
-Count: 50 (signed off 2026-07-21). No bench — near-misses live in the
+Count: 53 (signed off 2026-07-21; the "50" recorded at sign-off was a
+miscount of this same list — no names were added or removed, see M2 log).
+No bench — near-misses live in the
 **carried-in-essays ledger**, each assigned to the entry that tells their story:
 Hippasus → the irrational · Eudoxus → Archimedes + the limit · Diophantus →
 Fermat (the margin was his book) + algebra · Zu Chongzhi → Liu Hui ·

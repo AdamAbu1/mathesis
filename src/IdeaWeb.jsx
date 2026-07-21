@@ -102,7 +102,11 @@ export default function IdeaWeb({ selectedId, onSelect }) {
                 />
               )}
               <circle cx={x} cy={y} r={isSel ? 6.5 : 4.5} filter="url(#webrough)" />
-              <text x={x} y={y + 20} textAnchor="middle">
+              <text
+                x={x}
+                y={y + 20}
+                textAnchor={x > W - 90 ? 'end' : x < 90 ? 'start' : 'middle'}
+              >
                 {i.name}
               </text>
             </g>
