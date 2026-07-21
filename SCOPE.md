@@ -74,7 +74,7 @@ your view of reality, it doesn't ship.
 - **Eastern**: Liu Hui, Aryabhata, Brahmagupta, Madhava
 - **Islamic**: Al-Khwarizmi, Ibn al-Haytham, Omar Khayyam
 - **Renaissance**: Fibonacci, Cardano, Viète, Napier
-- **Revolution**: Descartes, Fermat, Pascal, Newton, Leibniz
+- **Revolution**: Galileo, Descartes, Fermat, Pascal, Newton, Leibniz
 - **Age of Euler**: Euler, Laplace, Fourier, Sophie Germain
 - **Age of Rigor**: Gauss, Cauchy, Abel, Galois, Lobachevsky, Riemann, Cantor,
   Boole, Kovalevskaya, Poincaré
@@ -82,8 +82,9 @@ your view of reality, it doesn't ship.
 - **Modern**: Turing, von Neumann, Kolmogorov, Shannon, Grothendieck,
   Mandelbrot, Wiles, Mirzakhani
 
-Count: 47. **Bench** (owner may swap in/out): Eudoxus, Diophantus,
-Zu Chongzhi, Bhaskara II, al-Tusi, Galileo, Lagrange, Dedekind, Erdős, Conway.
+Count: 48. **Bench** (owner may swap in/out): Eudoxus, Diophantus,
+Zu Chongzhi, Bhaskara II, al-Tusi, Lagrange, Dedekind, Erdős, Conway,
+Piero della Francesca (see vanishing-point candidate below).
 Overlaps with Philosophia (Pythagoras, Hypatia, Descartes, Pascal, Leibniz) are
 fine — different app, different portrait style, different emphasis.
 
@@ -106,7 +107,7 @@ during writing, kept acyclic (test-enforced).
 1. **The Story of Zero** — Babylon → Brahmagupta → al-Khwarizmi → Fibonacci → Europe
 2. **The Death of Certainty** — Euclid → Khayyam → Lobachevsky → Riemann → Hilbert → Gödel → Turing
 3. **Taming Infinity** — Zeno → Archimedes → Madhava → Newton/Leibniz → Cauchy → Cantor
-4. **The Language of Nature** — Pythagoras → Descartes → Newton → Fourier → Noether
+4. **The Language of Nature** — Pythagoras → Galileo → Descartes → Newton → Fourier → Noether
 5. **A History of Chance** — Cardano → Pascal/Fermat → Laplace → Kolmogorov → Shannon
 
 ## Visual identity — the blackboard
@@ -167,6 +168,9 @@ Full re-theme, no engraved-paper carryover:
 
 ## Open questions for the owner
 
-1. Roster/bench swaps? (Galileo in? Erdős in?)
-2. Idea ledger cuts to reach ~24 — anything above feel skippable, anything missing?
+1. Roster/bench swaps? (Erdős in? Dedekind in?) Galileo promoted 2026-07-21.
+2. Idea ledger cuts to reach ~24 — anything skippable, anything missing?
+   Candidate addition: **the vanishing point** — Renaissance perspective →
+   projective geometry (parallel lines meet at infinity); the honest vehicle
+   for what da Vinci represents (owner ruling pending).
 3. "Lady Mathesis" as the guide persona, or a historical guide (e.g., Hypatia)?
