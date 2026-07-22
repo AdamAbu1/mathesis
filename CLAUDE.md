@@ -73,6 +73,20 @@ Theory and explanation only — never computation.
   https://github.com/AdamAbu1/mathesis (Pages), icons, bundled chalk webfont
   (Chalkduster is macOS-only — phones need a bundled font).
 
+## Deployment
+- LIVE at https://adamabu1.github.io/mathesis/ — every push to main auto-deploys
+  via .github/workflows/deploy.yml (runs `npm ci` → `npm test` → `npm run build`
+  → configure/upload/deploy-pages). Public repo AdamAbu1/mathesis, SSH remote
+  (`git@github.com:AdamAbu1/mathesis.git`). `gh` CLI is NOT installed here — use
+  the GitHub REST API (unauth reads) or SSH git for repo ops.
+- First deploy gotcha (2026-07-21): `configure-pages@v5` fails until Pages is
+  enabled. The repo owner must set Settings → Pages → Source → "GitHub Actions"
+  once (can't be done from here without a token). After that, pushes deploy
+  cleanly. Portraits ship as ~230KB JPEGs; originals stay OUT of the repo.
+- Known follow-up: Chalkduster is macOS-only, so headings/labels fall back to
+  Comic Sans/cursive on Win/Android/Linux — bundle an open-license chalk
+  webfont via @font-face to fix cross-platform.
+
 ## Commands
 - `npm run dev` (vite; .claude/launch.json has autoPort — 5173 often held by
   the Philosophia session) · `npm test` (vitest, 126 tests — keep green) ·
