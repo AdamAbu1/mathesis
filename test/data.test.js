@@ -105,20 +105,18 @@ describe('figure data schema', () => {
     }
   })
 
-  // M3 gate: the chalk portrait set (incl. portraits/mathesis.jpg for the
-  // guide medallion) and per-era emblems don't exist yet. Un-skip when the
-  // asset pass lands — the assertions are ready below.
-  it.skip('every portrait and thumbnail file exists on disk (M3)', async () => {
+  it('every portrait and thumbnail file exists on disk', async () => {
     const { existsSync } = await import('node:fs')
     const { join } = await import('node:path')
     for (const p of MATHEMATICIANS) {
       expect(existsSync(join(process.cwd(), 'public', p.portrait)), p.id).toBe(true)
       expect(existsSync(join(process.cwd(), 'public', p.thumb)), `${p.id} thumb`).toBe(true)
     }
+    // the agent's guide medallion (Lady Mathesis) ships with the portrait set
     expect(existsSync(join(process.cwd(), 'public', 'portraits/mathesis.jpg'))).toBe(true)
   })
 
-  it.skip('every era has a scrubber emblem on disk (M3)', async () => {
+  it('every era has a scrubber emblem on disk', async () => {
     const { existsSync } = await import('node:fs')
     const { join } = await import('node:path')
     for (const e of ERAS) {
