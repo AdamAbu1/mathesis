@@ -59,11 +59,16 @@ Theory and explanation only — never computation.
 
 ## Content status
 - M2 (done): all 53 figure entries + 72 annotated influence edges + all 28
-  idea essays written compact-but-real. M3 deepens them; don't ship lorem, ever.
-- M3 (next): chalk portrait set (white chalk on slate — template in SCOPE.md),
-  Lady Mathesis medallion (portraits/mathesis.jpg), era emblems, thumbs,
-  WORK_LINKS curation, content deepening. Un-skip the two `it.skip` asset
-  tests in test/data.test.js when portraits/emblems land.
+  idea essays written compact-but-real. Don't ship lorem, ever.
+- M3 assets (done): 53 chalk portraits + Lady Mathesis medallion
+  (portraits/mathesis.jpg) + 53 thumbs + 10 era emblems, generated via
+  nano_banana_pro (white chalk on slate, 3:4). Full-res PNG originals live
+  OUTSIDE the repo in ~/Desktop/Mathesis-portrait-originals (don't recommit).
+  Both asset tests un-skipped and green. NOTE: Erdős/Mirzakhani/Wiles portraits
+  are era-archetype likenesses, not named individuals — the model refused the
+  named-likeness prompts (recent real people); reword as archetype if regenerating.
+- M3 remaining: WORK_LINKS curation + link verification, and optional content
+  deepening of the compact entries.
 - M4: living chalk portraits + voice register; M5: deploy to
   https://github.com/AdamAbu1/mathesis (Pages), icons, bundled chalk webfont
   (Chalkduster is macOS-only — phones need a bundled font).
